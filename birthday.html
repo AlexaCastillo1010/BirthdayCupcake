@@ -1,0 +1,256 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blow Out The Candles!</title>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font --><style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1f2937; /* Dark background */
+        }
+        /* Custom flame styling for aesthetics */
+        .flame {
+            width: 8px;
+            height: 20px;
+            background-color: #fcd34d; /* Amber */
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 0 10px #f59e0b, 0 0 20px #ef4444; /* Orange glow */
+            transition: all 0.3s ease-out;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.9; }
+            100% { transform: scale(1.05); opacity: 1; }
+        }
+
+        .blown-out .flame {
+            height: 2px;
+            width: 10px;
+            background-color: #6b7280; /* Gray smoke */
+            box-shadow: none;
+            border-radius: 2px;
+            animation: none;
+        }
+        .blown-out .candle-wick {
+            height: 2px !important;
+        }
+
+        .candle-wick {
+            width: 2px;
+            height: 6px;
+            background-color: #4b5563; /* Dark gray wick */
+            margin-bottom: -1px;
+        }
+        .candle-body {
+            width: 20px;
+            height: 80px;
+            background: linear-gradient(180deg, #fecaca 0%, #fca5a5 100%); /* Pink gradient */
+            border-radius: 4px;
+            border: 1px solid #dc2626;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
+
+    <!-- Image Container (NEW) --><div class="flex justify-center gap-4 mb-8">
+        <!-- Image 1 --><img src="image (1).webp" alt="Confetti" class="rounded-full shadow-lg w-24 h-24 object-cover">
+        <!-- Image 2 --><img src="image (2).webp" alt="Birthday Cake" class="rounded-full shadow-lg w-24 h-24 object-cover">
+        <!-- Image 3 --><img src="image.webp" alt="Balloons" class="rounded-full shadow-lg w-24 h-24 object-cover">
+    </div>
+
+    <!-- Title and Instructions --><div id="status-message" class="text-white text-center mb-8">
+        <h1 class="text-5xl font-extrabold mb-2 text-yellow-300">Happy Birthday JC Grant Tantay!</h1>
+        <p class="text-xl text-gray-300">FUCK YOU NIGGER FOR BEING THE BEST FRIEND I HAVE</p>
+    </div>
+
+    <!-- Microphone Start Button --><button id="startButton" class="px-8 py-3 bg-red-600 text-white font-bold rounded-full shadow-lg hover:bg-red-700 transition duration-300 transform hover:scale-105">
+        Blow the candle then blow me fag
+    </button>
+
+    <!-- Visualizer (Hidden initially) --><div id="visualizer" class="w-full max-w-sm h-4 bg-gray-700 rounded-full mt-4 transition-all duration-100" style="opacity: 0;">
+        <div id="volumeBar" class="h-4 bg-green-500 rounded-full transition-all duration-100 ease-linear" style="width: 0%;"></div>
+    </div>
+
+
+    <!-- The Cake Container --><div id="cakeContainer" class="mt-12 scale-75 md:scale-100">
+        <!-- Candlesticks --><div id="candles" class="flex justify-around w-[400px] mb-[-40px]">
+            <!-- Candle 1 --><div class="candle flex flex-col items-center" data-lit="true">
+                <div class="flame"></div>
+                <div class="candle-wick"></div>
+                <div class="candle-body"></div>
+            </div>
+            <!-- Candle 2 --><div class="candle flex flex-col items-center" data-lit="true">
+                <div class="flame"></div>
+                <div class="candle-wick"></div>
+                <div class="candle-body"></div>
+            </div>
+            <!-- Candle 3 (Center) --><div class="candle flex flex-col items-center" data-lit="true">
+                <div class="flame"></div>
+                <div class="candle-wick"></div>
+                <div class="candle-body"></div>
+            </div>
+            <!-- Candle 4 --><div class="candle flex flex-col items-center" data-lit="true">
+                <div class="flame"></div>
+                <div class="candle-wick"></div>
+                <div class="candle-body"></div>
+            </div>
+            <!-- Candle 5 --><div class="candle flex flex-col items-center" data-lit="true">
+                <div class="flame"></div>
+                <div class="candle-wick"></div>
+                <div class="candle-body"></div>
+            </div>
+        </div>
+
+        <!-- Cake Body --><div class="w-[400px] h-32 bg-pink-300 rounded-lg shadow-2xl border-b-8 border-pink-500 relative">
+            <!-- Frosting / Icing Detail --><div class="absolute inset-x-0 top-0 h-4 bg-white rounded-t-lg border-t-2 border-gray-200"></div>
+            <!-- Sprinkles (dots) --><div class="absolute inset-0 p-2 opacity-50">
+                <span class="w-1 h-1 bg-blue-500 rounded-full absolute top-8 left-10"></span>
+                <span class="w-1 h-1 bg-red-500 rounded-full absolute top-12 right-20"></span>
+                <span class="w-1 h-1 bg-yellow-500 rounded-full absolute bottom-10 left-32"></span>
+                <span class="w-1 h-1 bg-green-500 rounded-full absolute top-20 right-5"></span>
+                <span class="w-1 h-1 bg-purple-500 rounded-full absolute bottom-5 left-5"></span>
+            </div>
+        </div>
+        <!-- Table/Plate base --><div class="w-[450px] h-4 bg-gray-500 mx-auto rounded-b-lg mt-2"></div>
+    </div>
+
+    <!-- Message Box (Instead of alert) --><div id="messageBox" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white p-8 rounded-lg text-center shadow-2xl transform scale-100 transition-all duration-300">
+            <h2 class="text-4xl font-bold text-red-600 mb-4">Happy Birthday lil bro !</h2>
+            <p id="messageText" class="text-xl text-gray-700 mb-6">Stay alive and we eat lots of sisig okay? Im proud of you</p>
+            <button onclick="window.location.reload()" class="px-6 py-2 bg-red-600 text-white font-semibold rounded-full hover:bg-red-700">
+                Not satisfied with one? Blow again if youre gay
+            </button>
+        </div>
+    </div>
+
+
+    <script>
+        // Set up global variables
+        let audioContext;
+        let analyser;
+        let animationFrameId;
+        const BLOW_THRESHOLD = 35; // Volume threshold (0-128 range) - may need adjustment based on mic sensitivity
+        let isBlowing = false;
+
+        const startButton = document.getElementById('startButton');
+        const statusMessage = document.getElementById('status-message');
+        const candles = document.querySelectorAll('.candle');
+        const visualizer = document.getElementById('visualizer');
+        const volumeBar = document.getElementById('volumeBar');
+
+        /**
+         * Initializes the Web Audio API and requests microphone access.
+         */
+        async function startMicrophone() {
+            try {
+                // 1. Hide the button and update status
+                startButton.disabled = true;
+                // Updated the text to be more descriptive when listening
+                startButton.textContent = "Listening for a blow and you blow hard gayass..."; 
+                startButton.classList.remove('bg-red-600');
+                startButton.classList.add('bg-gray-500');
+                statusMessage.innerHTML = `<h1 class="text-5xl font-extrabold mb-2 text-yellow-300">Ready!</h1><p class="text-xl text-gray-300">Make a wish and include me in there okay? You owe me lots</p>`;
+                visualizer.style.opacity = 1;
+
+                // 2. Request media stream (microphone)
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+                // 3. Set up Audio Context and Analyser
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const source = audioContext.createMediaStreamSource(stream);
+                analyser = audioContext.createAnalyser();
+
+                analyser.fftSize = 256; // Fast Fourier Transform size
+                source.connect(analyser);
+
+                // 4. Start the detection loop
+                detectBlow();
+
+            } catch (err) {
+                console.error('Error accessing the microphone:', err);
+                statusMessage.innerHTML = `<h1 class="text-5xl font-extrabold mb-2 text-red-500">Error!</h1><p class="text-xl text-gray-300">Microphone access denied or failed. You need to enable it to blow out the candles.</p>`;
+                startButton.style.display = 'none';
+                visualizer.style.opacity = 0;
+            }
+        }
+
+        /**
+         * The main loop to analyze microphone volume data.
+         */
+        function detectBlow() {
+            if (!analyser) return;
+
+            // Data array to hold the time domain data (raw waveform amplitude)
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            analyser.getByteTimeDomainData(dataArray); // Fills dataArray with amplitude data
+
+            // Calculate the average deviation from 128 (center)
+            let sumOfAbsDeviation = 0;
+            for (let i = 0; i < bufferLength; i++) {
+                // The data is unsigned (0-255), where 128 is the zero point.
+                sumOfAbsDeviation += Math.abs(dataArray[i] - 128);
+            }
+            // Average amplitude in the range 0 to 127
+            const averageAmplitude = sumOfAbsDeviation / bufferLength;
+
+            // Update visualizer
+            const volumePercent = Math.min(100, (averageAmplitude / (BLOW_THRESHOLD * 2)) * 100);
+            volumeBar.style.width = `${volumePercent}%`;
+            
+            // Change color based on volume (optional)
+            if (averageAmplitude > BLOW_THRESHOLD) {
+                volumeBar.classList.remove('bg-green-500');
+                volumeBar.classList.add('bg-yellow-400');
+            } else {
+                 volumeBar.classList.add('bg-green-500');
+                 volumeBar.classList.remove('bg-yellow-400');
+            }
+            
+
+            // Check if the amplitude exceeds the threshold and we haven't already blown
+            if (averageAmplitude > BLOW_THRESHOLD && !isBlowing) {
+                isBlowing = true;
+                blowOutCandles();
+                // Stop the detection loop after success
+                cancelAnimationFrame(animationFrameId);
+                return;
+            }
+
+            // Continue the loop
+            animationFrameId = requestAnimationFrame(detectBlow);
+        }
+
+        /**
+         * Extinguishes the virtual candles and shows a message.
+         */
+        function blowOutCandles() {
+            // Extinguish the flames one by one for a brief animation effect
+            candles.forEach((candle, index) => {
+                setTimeout(() => {
+                    candle.classList.add('blown-out');
+                    candle.setAttribute('data-lit', 'false');
+                }, index * 100); // Stagger the animation slightly
+            });
+
+            // Update final status message
+            statusMessage.innerHTML = `<h1 class="text-5xl font-extrabold mb-2 text-red-600">SUCCESS!</h1><p class="text-xl text-gray-300">You blew them all out! Now make your wish.</p>`;
+            
+            // Show the custom message box
+            setTimeout(() => {
+                const messageBox = document.getElementById('messageBox');
+                messageBox.classList.remove('hidden');
+                messageBox.classList.add('flex');
+            }, 600); // Show box after all candles are out
+        }
+
+        // Attach event listener
+        startButton.addEventListener('click', startMicrophone);
+    </script>
+</body>
+</html>
